@@ -30,12 +30,12 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> findByUser(User user) {
+    public List<Ticket> findByUser(User user, int pageSize, int pageNum) {
         return ticketRepository.findByUser(user);
     }
 
     @Override
-    public List<Ticket> findByEvent(Event event) {
+    public List<Ticket> findByEvent(Event event, int pageSize, int pageNum) {
         return ticketRepository.findByEvent(event);
     }
 

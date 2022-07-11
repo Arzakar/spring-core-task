@@ -10,8 +10,8 @@ public interface EventService {
     Event create(Event event);
 
     Event findById(long id);
-    List<Event> findByTitle(String title);
-    List<Event> findByDate(Date date);
+    List<Event> findByTitle(String title, int pageSize, int pageNum);
+    List<Event> findByDate(Date day, int pageSize, int pageNum);
 
     Event update(Event event);
 

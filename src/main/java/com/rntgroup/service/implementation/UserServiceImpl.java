@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByName(String name) {
+    public List<User> findByName(String name, int pageSize, int pageNum) {
         return userRepository.findByName(name);
     }
 

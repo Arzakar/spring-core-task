@@ -10,8 +10,8 @@ public interface TicketService {
 
     Ticket create(Ticket ticket);
 
-    List<Ticket> findByUser(User user);
-    List<Ticket> findByEvent(Event event);
+    List<Ticket> findByUser(User user, int pageSize, int pageNum);
+    List<Ticket> findByEvent(Event event, int pageSize, int pageNum);
 
     Ticket deleteById(long id);
 }

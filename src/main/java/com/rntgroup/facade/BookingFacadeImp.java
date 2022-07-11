@@ -3,91 +3,114 @@ package com.rntgroup.facade;
 import com.rntgroup.model.Event;
 import com.rntgroup.model.Ticket;
 import com.rntgroup.model.User;
+import com.rntgroup.service.EventService;
+import com.rntgroup.service.TicketService;
+import com.rntgroup.service.UserService;
+
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Component
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingFacadeImp implements BookingFacade {
+
+    EventService eventService;
+    UserService userService;
+    TicketService ticketService;
+
+    @Autowired
+    public BookingFacadeImp(EventService eventService,
+                            UserService userService,
+                            TicketService ticketService) {
+        this.eventService = eventService;
+        this.userService = userService;
+        this.ticketService = ticketService;
+    }
 
     @Override
     public Event getEventById(long eventId) {
-        return null;
+        return eventService.findById(eventId);
     }
 
     @Override
     public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
-        return null;
+        return eventService.findByTitle(title, pageSize, pageNum);
     }
 
     @Override
     public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
-        return null;
+        return eventService.findByDate(day, pageSize, pageNum);
     }
 
     @Override
     public Event createEvent(Event event) {
-        return null;
+        return eventService.create(event);
     }
 
     @Override
     public Event updateEvent(Event event) {
-        return null;
+        return eventService.update(event);
     }
 
     @Override
     public boolean deleteEvent(long eventId) {
-        return false;
+        return Objects.nonNull(eventService.deleteById(eventId));
     }
 
     @Override
     public User getUserById(long userId) {
-        return null;
+        return userService.findById(userId);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
+        return userService.findByEmail(email);
     }
 
     @Override
     public List<User> getUsersByName(String name, int pageSize, int pageNum) {
-        return null;
+        return userService.findByName(name, pageSize, pageNum);
     }
 
     @Override
     public User createUser(User user) {
-        return null;
+        return userService.create(user);
     }
 
     @Override
     public User updateUser(User user) {
-        return null;
+        return userService.update(user);
     }
 
     @Override
     public boolean deleteUser(long userId) {
-        return false;
+        return Objects.nonNull(userService.deleteById(userId));
     }
 
     @Override
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
-        return null;
+        Ticket ticket = new Ticket(0, eventId, userId, category, place);
+        return ticketService.create(ticket);
     }
 
     @Override
     public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
-        return null;
+        return ticketService.findByUser(user, pageSize, pageNum);
     }
 
     @Override
     public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
-        return null;
+        return ticketService.findByEvent(event, pageSize, pageNum);
     }
 
     @Override
     public boolean cancelTicket(long ticketId) {
-        return false;
+        return Objects.nonNull(ticketService.deleteById(ticketId));
     }
 }

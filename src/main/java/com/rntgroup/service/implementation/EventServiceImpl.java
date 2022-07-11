@@ -31,12 +31,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> findByTitle(String title) {
+    public List<Event> findByTitle(String title, int pageSize, int pageNum) {
         return eventRepository.findByTitle(title);
     }
 
     @Override
-    public List<Event> findByDate(Date date) {
+    public List<Event> findByDate(Date date, int pageSize, int pageNum) {
         return eventRepository.findByDate(date);
     }
 
