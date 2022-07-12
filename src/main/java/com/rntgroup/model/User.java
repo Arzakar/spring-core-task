@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 /**
- * TODO: User id should be unique
+ * TODO: User id should be unique <br>
  * TODO: User email should be unique
  */
 
@@ -17,25 +17,10 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class User implements Entity<Long> {
 
-    long id;
+    Long id;
     String name;
     String email;
 
-    /**
-     * User Id. UNIQUE.
-     * @return User Id.
-     */
-//    long getId();
-//    void setId(long id);
-//    String getName();
-//    void setName(String name);
-
-    /**
-     * User email. UNIQUE.
-     * @return User email.
-     */
-//    String getEmail();
-//    void setEmail(String email);
 }

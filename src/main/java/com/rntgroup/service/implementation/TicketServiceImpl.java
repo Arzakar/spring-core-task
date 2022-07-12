@@ -22,7 +22,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket create(Ticket ticket) {
-        if (ticketRepository.existByPlace(ticket.getPlace())) {
+        if (ticketRepository.existByPlace(ticket)) {
             throw new IllegalStateException(String.format("Ticket with place = %d already exist", ticket.getPlace()));
         }
 

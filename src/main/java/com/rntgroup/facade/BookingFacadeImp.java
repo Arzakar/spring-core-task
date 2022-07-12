@@ -27,15 +27,12 @@ public class BookingFacadeImp implements BookingFacade {
         this.eventService = eventService;
         this.userService = userService;
         this.ticketService = ticketService;
-        System.out.println(this + " - фасад создан");
-    }
-
-    public void testMethod() {
-        System.out.println("Это фасад");
-        System.out.println(eventService + " - eventService");
-        System.out.println(eventService.getRepoInfo());
-        System.out.println(userService + " - userService");
-        System.out.println(ticketService + " - ticketService");
+        System.out.println("Фасад " + this.getClass().getSimpleName() +
+                " создан. Зависимости: " +
+                eventService.getClass().getSimpleName() + ", " +
+                userService.getClass().getSimpleName() + ", " +
+                ticketService.getClass().getSimpleName() + ", " +
+                " успешно внедрены");
     }
 
     @Override
@@ -100,7 +97,7 @@ public class BookingFacadeImp implements BookingFacade {
 
     @Override
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
-        Ticket ticket = new Ticket(0, eventId, userId, category, place);
+        Ticket ticket = new Ticket(0L, eventId, userId, category, place);
         return ticketService.create(ticket);
     }
 

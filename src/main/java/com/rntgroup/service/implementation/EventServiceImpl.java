@@ -2,6 +2,7 @@ package com.rntgroup.service.implementation;
 
 import com.rntgroup.model.Event;
 import com.rntgroup.repository.EventRepository;
+import com.rntgroup.repository.util.Page;
 import com.rntgroup.service.EventService;
 
 import lombok.AccessLevel;
@@ -36,12 +37,14 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> findByTitle(String title, int pageSize, int pageNum) {
-        return eventRepository.findByTitle(title);
+        return eventRepository.findByTitle(title, Page.of(pageSize, pageNum))
+                .getContent();
     }
 
     @Override
     public List<Event> findByDate(Date date, int pageSize, int pageNum) {
-        return eventRepository.findByDate(date);
+        return eventRepository.findByDate(date, Page.of(pageSize, pageNum))
+                .getContent();
     }
 
     @Override

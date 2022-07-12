@@ -14,9 +14,9 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Ticket {
+public class Ticket implements Entity<Long> {
 
-    long id;
+    Long id;
     long eventId;
     long userId;
     Category category;

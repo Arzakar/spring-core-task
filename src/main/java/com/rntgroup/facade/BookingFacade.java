@@ -13,8 +13,6 @@ import java.util.List;
  */
 public interface BookingFacade {
 
-    void testMethod();
-
     /**
      * Gets event by its id.
      * @return Event.
