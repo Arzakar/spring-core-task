@@ -5,7 +5,7 @@ import com.rntgroup.model.Event;
 import java.util.Date;
 import java.util.List;
 
-public interface EventRepository extends CustomRepository<Event, Long> {
+public interface EventRepository extends Repository<Event, Long> {
 
     List<Event> findByTitle(String title);
     List<Event> findByDate(Date date);

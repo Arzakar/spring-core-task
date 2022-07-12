@@ -6,7 +6,7 @@ import com.rntgroup.model.User;
 
 import java.util.List;
 
-public interface TicketRepository extends CustomRepository<Ticket, Long> {
+public interface TicketRepository extends Repository<Ticket, Long> {
 
     List<Ticket> findByUser(User user);
     List<Ticket> findByEvent(Event event);

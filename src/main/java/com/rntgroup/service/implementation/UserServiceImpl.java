@@ -5,17 +5,17 @@ import com.rntgroup.repository.UserRepository;
 import com.rntgroup.service.UserService;
 
 import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     UserRepository userRepository;
 
     @Override

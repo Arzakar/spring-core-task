@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface EventService {
 
+    String getRepoInfo();
+
     Event create(Event event);
 
     Event findById(long id);

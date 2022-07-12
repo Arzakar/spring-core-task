@@ -9,14 +9,11 @@ import com.rntgroup.service.UserService;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@Component
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingFacadeImp implements BookingFacade {
 
@@ -24,13 +21,21 @@ public class BookingFacadeImp implements BookingFacade {
     UserService userService;
     TicketService ticketService;
 
-    @Autowired
     public BookingFacadeImp(EventService eventService,
                             UserService userService,
                             TicketService ticketService) {
         this.eventService = eventService;
         this.userService = userService;
         this.ticketService = ticketService;
+        System.out.println(this + " - фасад создан");
+    }
+
+    public void testMethod() {
+        System.out.println("Это фасад");
+        System.out.println(eventService + " - eventService");
+        System.out.println(eventService.getRepoInfo());
+        System.out.println(userService + " - userService");
+        System.out.println(ticketService + " - ticketService");
     }
 
     @Override

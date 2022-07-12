@@ -7,17 +7,17 @@ import com.rntgroup.repository.TicketRepository;
 import com.rntgroup.service.TicketService;
 
 import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TicketServiceImpl implements TicketService {
 
-    @Autowired
     TicketRepository ticketRepository;
 
     @Override

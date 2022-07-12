@@ -5,19 +5,23 @@ import com.rntgroup.repository.EventRepository;
 import com.rntgroup.service.EventService;
 
 import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventServiceImpl implements EventService {
 
-    @Autowired
     EventRepository eventRepository;
+
+    public String getRepoInfo() {
+        return eventRepository + " - eventRepository";
+    }
 
     @Override
     public Event create(Event event) {
