@@ -1,22 +1,41 @@
 package com.rntgroup.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+
 /**
- * Created by maksym_govorischev on 14/03/14.
+ * TODO: User id should be unique
+ * TODO: User email should be unique
  */
-public interface User {
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class User {
+
+    long id;
+    String name;
+    String email;
+
     /**
      * User Id. UNIQUE.
      * @return User Id.
      */
-    long getId();
-    void setId(long id);
-    String getName();
-    void setName(String name);
+//    long getId();
+//    void setId(long id);
+//    String getName();
+//    void setName(String name);
 
     /**
      * User email. UNIQUE.
      * @return User email.
      */
-    String getEmail();
-    void setEmail(String email);
+//    String getEmail();
+//    void setEmail(String email);
 }

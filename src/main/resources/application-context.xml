@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="eventRepository"
+          class="com.rntgroup.repository.implementation.EventRepositoryImpl"/>
+    <bean id="eventService"
+          class="com.rntgroup.service.implementation.EventServiceImpl"
+          autowire="byType"/>
+
+    <bean id="ticketRepository"
+          class="com.rntgroup.repository.implementation.TicketRepositoryImpl"/>
+    <bean id="ticketService"
+          class="com.rntgroup.service.implementation.TicketServiceImpl"
+          autowire="byType"/>
+
+    <bean id="userRepository"
+          class="com.rntgroup.repository.implementation.UserRepositoryImpl"/>
+    <bean id="userService"
+          class="com.rntgroup.service.implementation.UserServiceImpl"
+          autowire="byType"/>
+
+    <bean id="bookingFacade"
+          class="com.rntgroup.facade.BookingFacadeImp">
+        <constructor-arg index="0" ref="eventService"/>
+        <constructor-arg index="1" ref="userService"/>
+        <constructor-arg index="2" ref="ticketService"/>
+    </bean>
+</beans>
