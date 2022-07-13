@@ -2,6 +2,9 @@ package com.rntgroup.db;
 
 import com.rntgroup.model.Entity;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Database<ID, T> {
 
     protected AbstractDatabase() {
@@ -12,7 +15,8 @@ public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Data
     public T insert(T entity) {
         ID id = generateId();
         entity.setId(id);
-        return getData().put(id, entity);
+        getData().put(id, entity);
+        return entity;
     }
 
     @Override
@@ -22,7 +26,14 @@ public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Data
 
     @Override
     public T update(T entity) {
-        return getData().put(entity.getId(), entity);
+        ID id = entity.getId();
+
+        if (Objects.nonNull(getData().get(id))) {
+            getData().put(id, entity);
+            return entity;
+        }
+
+        return null;
     }
 
     public T deleteById(ID id) {
