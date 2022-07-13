@@ -2,6 +2,7 @@ package com.rntgroup.service.implementation;
 
 import com.rntgroup.model.User;
 import com.rntgroup.repository.UserRepository;
+import com.rntgroup.repository.util.Page;
 import com.rntgroup.service.UserService;
 
 import lombok.AccessLevel;
@@ -31,7 +32,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByName(String name, int pageSize, int pageNum) {
-        return userRepository.findByName(name);
+        return userRepository.findByName(name, Page.of(pageSize, pageNum))
+                .getContent();
     }
 
     @Override
