@@ -47,21 +47,18 @@ class EventDatabaseTest {
     @Test
     @DisplayName("Должен сохранить Event в базе и проставить уникальный id независимо от того, какой был передан")
     void shouldCreateEvent() {
-        EventDatabase createTestEventDatabase = new EventDatabase();
-        createTestEventDatabase.setData(eventDatabase.getData());
-
         Event cinemaEvent = new Event(null, "Фильм: Доктор Стрэндж", TestUtil.createDate(2022, 5, 12));
         Event learningEvent = new Event(5L, "Обучение рукопашному бою", TestUtil.createDate(2022, 8, 30));
 
-        Event actualCinemaEventResult = createTestEventDatabase.insert(cinemaEvent);
+        Event actualCinemaEventResult = eventDatabase.insert(cinemaEvent);
 
         assertEquals(new Event(3L, cinemaEvent.getTitle(), cinemaEvent.getDate()), actualCinemaEventResult);
-        assertEquals(createTestEventDatabase.getData().get(3L), actualCinemaEventResult);
+        assertEquals(eventDatabase.getData().get(3L), actualCinemaEventResult);
 
-        Event actualLearningEventResult = createTestEventDatabase.insert(learningEvent);
+        Event actualLearningEventResult = eventDatabase.insert(learningEvent);
 
         assertEquals(new Event(7L, learningEvent.getTitle(), learningEvent.getDate()), actualLearningEventResult);
-        assertEquals(createTestEventDatabase.getData().get(7L), actualLearningEventResult);
+        assertEquals(eventDatabase.getData().get(7L), actualLearningEventResult);
     }
 
     @ParameterizedTest(name = "[{index}] Event id = {0}, events with this id = {1}")
@@ -84,61 +81,51 @@ class EventDatabaseTest {
     @Test
     @DisplayName("Должен обновить запись в таблице")
     void shouldUpdateEvent() {
-        EventDatabase updateTestEventDatabase = new EventDatabase();
-        updateTestEventDatabase.setData(eventDatabase.getData());
-
         Event changedEvent = new Event(4L, "КВН. Молодёжная лига", TestUtil.createDate(2023, JANUARY, 15));
-        Event actualResult = updateTestEventDatabase.update(changedEvent);
+        Event actualResult = eventDatabase.update(changedEvent);
 
         assertEquals(changedEvent, actualResult);
-        assertEquals(updateTestEventDatabase.getData().get(4L), changedEvent);
+        assertEquals(eventDatabase.getData().get(4L), changedEvent);
 
     }
 
     @Test
     @DisplayName("Не должен обновить запись в таблице, т.к. записи с таким id нет")
     void shouldNotUpdateEvent() {
-        EventDatabase updateTestEventDatabase = new EventDatabase();
-        updateTestEventDatabase.setData(eventDatabase.getData());
-
         Event changedEvent = new Event(10L, "КВН. Молодёжная лига", TestUtil.createDate(2023, JANUARY, 15));
-        Event actualResult = updateTestEventDatabase.update(changedEvent);
+        Event actualResult = eventDatabase.update(changedEvent);
 
         assertNull(actualResult);
-        assertFalse(updateTestEventDatabase.getData().containsKey(10L));
-        assertFalse(updateTestEventDatabase.getData().containsValue(changedEvent));
+        assertFalse(eventDatabase.getData().containsKey(10L));
+        assertFalse(eventDatabase.getData().containsValue(changedEvent));
 
     }
 
     @Test
     @DisplayName("Должен удалить запись с БД")
     void shouldDeleteEventById() {
-        EventDatabase updateTestEventDatabase = new EventDatabase();
-        updateTestEventDatabase.setData(eventDatabase.getData());
-        long originSize = updateTestEventDatabase.getSize();
+        long originSize = eventDatabase.getSize();
 
-        Event deletedEvent = updateTestEventDatabase.deleteById(4L);
+        Event deletedEvent = eventDatabase.deleteById(4L);
 
         assertEquals(new Event(4L, "КВН", TestUtil.createDate(2023, JANUARY, 15)), deletedEvent);
-        assertEquals(originSize - 1, updateTestEventDatabase.getSize());
-        assertFalse(updateTestEventDatabase.getData().containsKey(4L));
-        assertFalse(updateTestEventDatabase.getData().containsValue(deletedEvent));
+        assertEquals(originSize - 1, eventDatabase.getSize());
+        assertFalse(eventDatabase.getData().containsKey(4L));
+        assertFalse(eventDatabase.getData().containsValue(deletedEvent));
     }
 
     @Test
     @DisplayName("Не должен удалить запись с БД, т.к. записи с таким id в ней нет")
     void shouldNotDeleteEventById() {
-        EventDatabase updateTestEventDatabase = new EventDatabase();
-        updateTestEventDatabase.setData(eventDatabase.getData());
-        long originSize = updateTestEventDatabase.getSize();
+        long originSize = eventDatabase.getSize();
 
-        Event deletedEvent = updateTestEventDatabase.deleteById(10L);
+        Event deletedEvent = eventDatabase.deleteById(10L);
 
         assertNull(deletedEvent);
-        assertEquals(originSize, updateTestEventDatabase.getSize());
+        assertEquals(originSize, eventDatabase.getSize());
     }
 
-    @ParameterizedTest(name = "[{index}] Event title = {0}, events with this name = {1}")
+    @ParameterizedTest(name = "[{index}] Event title = {0}, events with this title = {1}")
     @MethodSource("getTitles")
     @DisplayName("Должен вернуть все Event из БД с конкретным именем")
     void shouldReturnEventsByTitle(String title, int expectedListSize) {
