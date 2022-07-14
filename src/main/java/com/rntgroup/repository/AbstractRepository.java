@@ -1,6 +1,5 @@
 package com.rntgroup.repository;
 
-import com.rntgroup.db.Database;
 import com.rntgroup.model.Entity;
 
 import java.util.Optional;
@@ -18,7 +17,7 @@ public abstract class AbstractRepository<T extends Entity<ID>, ID> implements Re
 
     @Override
     public Optional<T> findById(ID id) {
-        return Optional.of(getDatabase().selectById(id));
+        return Optional.ofNullable(getDatabase().selectById(id));
     }
 
     @Override

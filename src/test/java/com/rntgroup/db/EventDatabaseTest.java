@@ -38,7 +38,7 @@ class EventDatabaseTest {
         ObjectMapper objectMapper = new ObjectMapper().setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
         Map<Long, Event> testEvents = objectMapper.readValue(
-                TestUtil.readResourceAsString("init-event-data.json"),
+                TestUtil.readResourceAsString("db/init-event-data.json"),
                 new TypeReference<>() {}
         );
         eventDatabase.setData(testEvents);

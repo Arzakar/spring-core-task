@@ -2,7 +2,6 @@ package com.rntgroup.db;
 
 import com.rntgroup.model.Entity;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Database<ID, T> {

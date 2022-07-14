@@ -29,7 +29,7 @@ class UserDatabaseTest {
         ObjectMapper objectMapper = new ObjectMapper();
 
         Map<Long, User> testUsers = objectMapper.readValue(
-                TestUtil.readResourceAsString("init-user-data.json"),
+                TestUtil.readResourceAsString("db/init-user-data.json"),
                 new TypeReference<>() {}
         );
         userDatabase.setData(testUsers);

@@ -2,7 +2,6 @@ package com.rntgroup.repository;
 
 import com.rntgroup.db.UserDatabase;
 import com.rntgroup.model.User;
-import com.rntgroup.repository.AbstractRepository;
 
 import com.rntgroup.repository.util.Page;
 import com.rntgroup.repository.util.SearchResult;
@@ -25,7 +24,7 @@ public class UserRepository extends AbstractRepository<User, Long> {
     }
 
     public Optional<User> findByEmail(String email) {
-        return Optional.of(getDatabase().selectByEmail(email));
+        return Optional.ofNullable(getDatabase().selectByEmail(email));
     }
 
 }

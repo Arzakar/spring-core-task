@@ -1,6 +1,5 @@
 package com.rntgroup.repository;
 
-import com.rntgroup.db.Database;
 import com.rntgroup.db.EventDatabase;
 import com.rntgroup.model.Event;
 import com.rntgroup.repository.util.Page;

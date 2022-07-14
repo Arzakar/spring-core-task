@@ -29,7 +29,7 @@ class TicketDatabaseTest {
         ObjectMapper objectMapper = new ObjectMapper();
 
         Map<Long, Ticket> testTickets = objectMapper.readValue(
-                TestUtil.readResourceAsString("init-ticket-data.json"),
+                TestUtil.readResourceAsString("db/init-ticket-data.json"),
                 new TypeReference<>() {}
         );
         ticketDatabase.setData(testTickets);
