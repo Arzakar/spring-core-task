@@ -9,6 +9,7 @@ public class SpringCoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
         BookingFacade bookingFacade = context.getBean("bookingFacade", BookingFacade.class);
+
     }
 
 }

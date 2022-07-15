@@ -27,12 +27,6 @@ public class BookingFacadeImp implements BookingFacade {
         this.eventService = eventService;
         this.userService = userService;
         this.ticketService = ticketService;
-        System.out.println("Фасад " + this.getClass().getSimpleName() +
-                " создан. Зависимости: " +
-                eventService.getClass().getSimpleName() + ", " +
-                userService.getClass().getSimpleName() + ", " +
-                ticketService.getClass().getSimpleName() + ", " +
-                " успешно внедрены");
     }
 
     @Override

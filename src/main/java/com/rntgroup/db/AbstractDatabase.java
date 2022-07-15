@@ -6,10 +6,6 @@ import java.util.Objects;
 
 public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Database<ID, T> {
 
-    protected AbstractDatabase() {
-        System.out.println("База данных " + this.getClass().getSimpleName() + " создана");
-    }
-
     @Override
     public T insert(T entity) {
         ID id = generateId();

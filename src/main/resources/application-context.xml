@@ -8,6 +8,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean class="com.rntgroup.configuration.CustomBeanPostProcessor"/>
+
     <bean id="eventDatabase" class="com.rntgroup.db.EventDatabase"/>
     <bean id="ticketDatabase" class="com.rntgroup.db.TicketDatabase"/>
     <bean id="userDatabase" class="com.rntgroup.db.UserDatabase"/>

@@ -6,10 +6,6 @@ import java.util.Optional;
 
 public abstract class AbstractRepository<T extends Entity<ID>, ID> implements Repository<T, ID> {
 
-    public AbstractRepository() {
-        System.out.println("Репозиторий " + this.getClass().getSimpleName() + " создан");
-    }
-
     @Override
     public T save(T entity) {
         return getDatabase().insert(entity);
