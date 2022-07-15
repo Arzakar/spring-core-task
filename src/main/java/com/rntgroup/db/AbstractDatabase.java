@@ -2,17 +2,16 @@ package com.rntgroup.db;
 
 import com.rntgroup.model.Entity;
 
-public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Database<ID, T> {
+import java.util.Objects;
 
-    protected AbstractDatabase() {
-        System.out.println("База данных " + this.getClass().getSimpleName() + " создана");
-    }
+public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Database<ID, T> {
 
     @Override
     public T insert(T entity) {
         ID id = generateId();
         entity.setId(id);
-        return getData().put(id, entity);
+        getData().put(id, entity);
+        return entity;
     }
 
     @Override
@@ -22,7 +21,14 @@ public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Data
 
     @Override
     public T update(T entity) {
-        return getData().put(entity.getId(), entity);
+        ID id = entity.getId();
+
+        if (Objects.nonNull(getData().get(id))) {
+            getData().put(id, entity);
+            return entity;
+        }
+
+        return null;
     }
 
     public T deleteById(ID id) {

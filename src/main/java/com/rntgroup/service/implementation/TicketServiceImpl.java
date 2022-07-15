@@ -4,6 +4,7 @@ import com.rntgroup.model.Event;
 import com.rntgroup.model.Ticket;
 import com.rntgroup.model.User;
 import com.rntgroup.repository.TicketRepository;
+import com.rntgroup.repository.util.Page;
 import com.rntgroup.service.TicketService;
 
 import lombok.AccessLevel;
@@ -31,12 +32,14 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> findByUser(User user, int pageSize, int pageNum) {
-        return ticketRepository.findByUser(user);
+        return ticketRepository.findByUserId(user.getId(), Page.of(pageSize, pageNum))
+                .getContent();
     }
 
     @Override
     public List<Ticket> findByEvent(Event event, int pageSize, int pageNum) {
-        return ticketRepository.findByEvent(event);
+        return ticketRepository.findByEventId(event.getId(), Page.of(pageSize, pageNum))
+                .getContent();
     }
 
     @Override

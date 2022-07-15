@@ -20,10 +20,6 @@ public class EventServiceImpl implements EventService {
 
     EventRepository eventRepository;
 
-    public String getRepoInfo() {
-        return eventRepository + " - eventRepository";
-    }
-
     @Override
     public Event create(Event event) {
         return eventRepository.save(event);
