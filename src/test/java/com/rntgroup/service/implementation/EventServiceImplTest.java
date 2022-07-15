@@ -10,9 +10,9 @@ import static org.mockito.Mockito.when;
 import com.rntgroup.TestUtil;
 import com.rntgroup.model.Event;
 import com.rntgroup.repository.EventRepository;
-
 import com.rntgroup.repository.util.Page;
 import com.rntgroup.repository.util.SearchResult;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

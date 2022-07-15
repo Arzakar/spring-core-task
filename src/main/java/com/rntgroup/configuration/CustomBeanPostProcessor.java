@@ -4,9 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rntgroup.db.EventDatabase;
-import com.rntgroup.db.TicketDatabase;
 import com.rntgroup.db.UserDatabase;
 import com.rntgroup.model.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.io.ClassPathResource;
@@ -20,17 +21,19 @@ import java.util.Map;
 
 public class CustomBeanPostProcessor implements BeanPostProcessor {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CustomBeanPostProcessor.class.getName());
     private final ObjectMapper objectMapper = new ObjectMapper().setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println(bean + " start created with name " + beanName);
 
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        LOG.info("Bean with name '{}' successfully created", beanName);
+
         Class<?> beanClass = bean.getClass();
 
 //        if (beanClass.equals(EventDatabase.class)

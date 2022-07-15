@@ -9,22 +9,27 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
-import java.util.Objects;
 
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventRepository extends AbstractRepository<Event, Long> {
 
+    static Logger logger = LoggerFactory.getLogger(EventRepository.class.getSimpleName());
+
     EventDatabase database;
 
     public SearchResult<Event> findByTitle(String title, Page page) {
+        logger.info("Method {}#findByTitle was called with params: title = {}, page = {}", this.getClass().getSimpleName(), title, page);
         return SearchResult.pack(getDatabase().selectByTitle(title), page);
     }
 
     public SearchResult<Event> findByDate(Date date, Page page) {
+        logger.info("Method {}#findByDate was called with params: date = {}, page = {}", this.getClass().getSimpleName(), date, page);
         return SearchResult.pack(getDatabase().selectByDate(date), page);
     }
 }
