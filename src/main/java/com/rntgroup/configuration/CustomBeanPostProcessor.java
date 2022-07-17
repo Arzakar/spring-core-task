@@ -43,23 +43,23 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        LOG.info("Bean with name '{}' successfully created", beanName);
+        LOG.debug("Bean with name '{}' successfully created", beanName);
 
         Class<?> beanClass = bean.getClass();
 
         if (beanClass.equals(EventDatabase.class)) {
             loadEventData(bean);
-            LOG.info("Data loaded successfully in {} from {}", beanClass.getSimpleName(), eventDataFilePath);
+            LOG.debug("Data loaded successfully in {} from {}", beanClass.getSimpleName(), eventDataFilePath);
         }
 
         if (beanClass.equals(TicketDatabase.class)) {
             loadTicketData(bean);
-            LOG.info("Data loaded successfully in {} from {}", beanClass.getSimpleName(), ticketDataFilePath);
+            LOG.debug("Data loaded successfully in {} from {}", beanClass.getSimpleName(), ticketDataFilePath);
         }
 
         if (beanClass.equals(UserDatabase.class)) {
             loadUserData(bean);
-            LOG.info("Data loaded successfully in {} from {}", beanClass.getSimpleName(), userDataFilePath);
+            LOG.debug("Data loaded successfully in {} from {}", beanClass.getSimpleName(), userDataFilePath);
         }
 
         return bean;

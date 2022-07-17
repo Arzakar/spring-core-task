@@ -24,12 +24,12 @@ public class UserRepository extends AbstractRepository<User, Long> {
     UserDatabase database;
 
     public SearchResult<User> findByName(String name, Page page) {
-        LOG.info("Method {}#findByName was called with params: name = {}, page = {}", this.getClass().getSimpleName(), name, page);
+        LOG.debug("Method {}#findByName was called with params: name = {}, page = {}", this.getClass().getSimpleName(), name, page);
         return SearchResult.pack(getDatabase().selectByName(name), page);
     }
 
     public Optional<User> findByEmail(String email) {
-        LOG.info("Method {}#findByEmail was called with param: email = {}", this.getClass().getSimpleName(), email);
+        LOG.debug("Method {}#findByEmail was called with param: email = {}", this.getClass().getSimpleName(), email);
         return Optional.ofNullable(getDatabase().selectByEmail(email));
     }
 

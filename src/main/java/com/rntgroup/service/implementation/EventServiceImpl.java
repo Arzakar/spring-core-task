@@ -26,13 +26,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event create(Event event) {
-        LOG.info("Method {}#create was called with param: event = {}", this.getClass().getSimpleName(), event);
+        LOG.debug("Method {}#create was called with param: event = {}", this.getClass().getSimpleName(), event);
         return eventRepository.save(event);
     }
 
     @Override
     public Event findById(long id) {
-        LOG.info("Method {}#findById was called with param: id = {}", this.getClass().getSimpleName(), id);
+        LOG.debug("Method {}#findById was called with param: id = {}", this.getClass().getSimpleName(), id);
         return eventRepository.findById(id).orElseThrow(() -> {
                     var error = new RuntimeException(String.format("Event with id = %d not found", id));
                     LOG.error("Method {}#findById returned error with message: {}", this.getClass().getSimpleName(), error.getMessage());
@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> findByTitle(String title, int pageSize, int pageNum) {
-        LOG.info("Method {}#findByTitle was called with params: title = {}, pageSize = {}, pageNum = {}",
+        LOG.debug("Method {}#findByTitle was called with params: title = {}, pageSize = {}, pageNum = {}",
                 this.getClass().getSimpleName(), title, pageSize, pageNum);
         return eventRepository.findByTitle(title, Page.of(pageSize, pageNum))
                 .getContent();
@@ -50,7 +50,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> findByDate(Date date, int pageSize, int pageNum) {
-        LOG.info("Method {}#findByDate was called with params: date = {}, pageSize = {}, pageNum = {}",
+        LOG.debug("Method {}#findByDate was called with params: date = {}, pageSize = {}, pageNum = {}",
                 this.getClass().getSimpleName(), date, pageSize, pageNum);
         return eventRepository.findByDate(date, Page.of(pageSize, pageNum))
                 .getContent();
@@ -58,13 +58,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event update(Event event) {
-        LOG.info("Method {}#update was called with param: event = {}", this.getClass().getSimpleName(), event);
+        LOG.debug("Method {}#update was called with param: event = {}", this.getClass().getSimpleName(), event);
         return eventRepository.update(event);
     }
 
     @Override
     public Event deleteById(long eventId) {
-        LOG.info("Method {}#deleteById was called with param: eventId = {}", this.getClass().getSimpleName(), eventId);
+        LOG.debug("Method {}#deleteById was called with param: eventId = {}", this.getClass().getSimpleName(), eventId);
         return eventRepository.deleteById(eventId);
     }
 }

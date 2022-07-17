@@ -25,14 +25,14 @@ public class UserDatabase extends AbstractDatabase<Long, User>{
     Map<Long, User> data = new HashMap<>();
 
     public List<User> selectByName(String name) {
-        LOG.info("Method {}#selectByName was called with param: name = {}", this.getClass().getSimpleName(), name);
+        LOG.debug("Method {}#selectByName was called with param: name = {}", this.getClass().getSimpleName(), name);
         return getData().values().stream()
                 .filter(user -> user.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
     public User selectByEmail(String email) {
-        LOG.info("Method {}#selectByEmail was called with param: email = {}", this.getClass().getSimpleName(), email);
+        LOG.debug("Method {}#selectByEmail was called with param: email = {}", this.getClass().getSimpleName(), email);
         return getData().values().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()

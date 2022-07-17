@@ -12,7 +12,7 @@ public abstract class AbstractDatabase<ID, T extends Entity<ID>> implements Data
 
     @Override
     public T insert(T entity) {
-        LOG.info("Method {}#insert was called with param: entity = {}", this.getClass().getSimpleName(), entity);
+        LOG.debug("Method {}#insert was called with param: entity = {}", this.getClass().getSimpleName(), entity);
         ID id = generateId();
         entity.setId(id);
         getData().put(id, entity);

@@ -25,21 +25,21 @@ public class TicketDatabase extends AbstractDatabase<Long, Ticket> {
     Map<Long, Ticket> data = new HashMap<>();
 
     public List<Ticket> selectByEventId(long eventId) {
-        LOG.info("Method {}#selectByEventId was called with param: eventId = {}", this.getClass().getSimpleName(), eventId);
+        LOG.debug("Method {}#selectByEventId was called with param: eventId = {}", this.getClass().getSimpleName(), eventId);
         return getData().values().stream()
                 .filter(ticket -> ticket.getEventId() == eventId)
                 .collect(Collectors.toList());
     }
 
     public List<Ticket> selectByUserId(long userId) {
-        LOG.info("Method {}#selectByUserId was called with param: userId = {}", this.getClass().getSimpleName(), userId);
+        LOG.debug("Method {}#selectByUserId was called with param: userId = {}", this.getClass().getSimpleName(), userId);
         return getData().values().stream()
                 .filter(ticket -> ticket.getUserId() == userId)
                 .collect(Collectors.toList());
     }
 
     public Ticket selectByEventIdAndPlace(long eventId, int place) {
-        LOG.info("Method {}#selectByEventIdAndPlace was called with params: eventId = {}, place = {}",
+        LOG.debug("Method {}#selectByEventIdAndPlace was called with params: eventId = {}, place = {}",
                 this.getClass().getSimpleName(), eventId, place);
         return getData().values().stream()
                 .filter(ticket -> ticket.getEventId() == eventId && ticket.getPlace() == place)
