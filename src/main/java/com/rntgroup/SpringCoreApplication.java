@@ -1,7 +1,6 @@
 package com.rntgroup;
 
 import com.rntgroup.facade.BookingFacade;
-import com.rntgroup.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +17,6 @@ public class SpringCoreApplication {
         LOG.info("ApplicationContext loaded successfully");
 
         BookingFacade bookingFacade = context.getBean("bookingFacade", BookingFacade.class);
-        bookingFacade.createUser(new User(0L, "User", "user.email@gmail.com"));
     }
 
 }
