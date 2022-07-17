@@ -27,7 +27,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket create(Ticket ticket) {
-        LOG.info("Method {}#create was called with param: ticket = {}", this.getClass().getSimpleName(), ticket);
+        LOG.debug("Method {}#create was called with param: ticket = {}", this.getClass().getSimpleName(), ticket);
         if (ticketRepository.existByPlace(ticket)) {
             var error = new IllegalStateException(String.format("Ticket with place = %d already exist", ticket.getPlace()));
             LOG.error("Method {}#create returned error with message: {}", this.getClass().getSimpleName(), error.getMessage());
@@ -39,7 +39,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> findByUser(User user, int pageSize, int pageNum) {
-        LOG.info("Method {}#findByUser was called with params: user = {}, pageSize = {}, pageNum = {}",
+        LOG.debug("Method {}#findByUser was called with params: user = {}, pageSize = {}, pageNum = {}",
                 this.getClass().getSimpleName(), user, pageSize, pageNum);
         return ticketRepository.findByUserId(user.getId(), Page.of(pageSize, pageNum))
                 .getContent();
@@ -47,7 +47,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> findByEvent(Event event, int pageSize, int pageNum) {
-        LOG.info("Method {}#findByEvent was called with params: event = {}, pageSize = {}, pageNum = {}",
+        LOG.debug("Method {}#findByEvent was called with params: event = {}, pageSize = {}, pageNum = {}",
                 this.getClass().getSimpleName(), event, pageSize, pageNum);
         return ticketRepository.findByEventId(event.getId(), Page.of(pageSize, pageNum))
                 .getContent();
@@ -55,7 +55,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket deleteById(long id) {
-        LOG.info("Method {}#deleteById was called with param: id = {}", this.getClass().getSimpleName(), id);
+        LOG.debug("Method {}#deleteById was called with param: id = {}", this.getClass().getSimpleName(), id);
         return ticketRepository.deleteById(id);
     }
 }

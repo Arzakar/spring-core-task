@@ -24,17 +24,17 @@ public class TicketRepository extends AbstractRepository<Ticket, Long> {
     TicketDatabase database;
 
     public SearchResult<Ticket> findByUserId(long userId, Page page) {
-        LOG.info("Method {}#findByUserId was called with params: userId = {}, page = {}", this.getClass().getSimpleName(), userId, page);
+        LOG.debug("Method {}#findByUserId was called with params: userId = {}, page = {}", this.getClass().getSimpleName(), userId, page);
         return SearchResult.pack(getDatabase().selectByUserId(userId), page);
     }
 
     public SearchResult<Ticket> findByEventId(long eventId, Page page) {
-        LOG.info("Method {}#findByEventId was called with params: eventId = {}, page = {}", this.getClass().getSimpleName(), eventId, page);
+        LOG.debug("Method {}#findByEventId was called with params: eventId = {}, page = {}", this.getClass().getSimpleName(), eventId, page);
         return SearchResult.pack(getDatabase().selectByEventId(eventId), page);
     }
 
     public boolean existByPlace(Ticket ticket) {
-        LOG.info("Method {}#existByPlace was called with param: ticket = {}", this.getClass().getSimpleName(), ticket);
+        LOG.debug("Method {}#existByPlace was called with param: ticket = {}", this.getClass().getSimpleName(), ticket);
         return Objects.nonNull(getDatabase().selectByEventIdAndPlace(ticket.getEventId(), ticket.getPlace()));
     }
 }
