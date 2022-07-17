@@ -20,8 +20,10 @@
           p:userDataFilePath="${data.userDatabase.initDataFilePath}"/>
 
     <bean id="eventDatabase" class="com.rntgroup.db.EventDatabase"/>
-    <bean id="ticketDatabase" class="com.rntgroup.db.TicketDatabase"/>
     <bean id="userDatabase" class="com.rntgroup.db.UserDatabase"/>
+    <bean id="ticketDatabase" class="com.rntgroup.db.TicketDatabase"
+          p:eventDatabase-ref="eventDatabase"
+          p:userDatabase-ref="userDatabase"/>
 
     <bean id="eventRepository"
           class="com.rntgroup.repository.EventRepository"
