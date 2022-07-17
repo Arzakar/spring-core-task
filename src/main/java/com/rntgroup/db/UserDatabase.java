@@ -20,19 +20,19 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDatabase extends AbstractDatabase<Long, User>{
 
-    private static Logger logger = LoggerFactory.getLogger(UserDatabase.class.getSimpleName());
+    static final Logger LOG = LoggerFactory.getLogger(UserDatabase.class.getSimpleName());
 
     Map<Long, User> data = new HashMap<>();
 
     public List<User> selectByName(String name) {
-        logger.info("Method {}#selectByName was called with param: name = {}", this.getClass().getSimpleName(), name);
+        LOG.info("Method {}#selectByName was called with param: name = {}", this.getClass().getSimpleName(), name);
         return getData().values().stream()
                 .filter(user -> user.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
     public User selectByEmail(String email) {
-        logger.info("Method {}#selectByEmail was called with param: email = {}", this.getClass().getSimpleName(), email);
+        LOG.info("Method {}#selectByEmail was called with param: email = {}", this.getClass().getSimpleName(), email);
         return getData().values().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()

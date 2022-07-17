@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventDatabase extends AbstractDatabase<Long, Event> {
 
-    private static Logger logger = LoggerFactory.getLogger(EventDatabase.class.getSimpleName());
+    static final Logger LOG = LoggerFactory.getLogger(EventDatabase.class.getSimpleName());
 
     Map<Long, Event> data = new HashMap<>(
             Map.of(0L, new Event(0L, "Концерт", new Calendar.Builder().setDate(2022, 5, 1).build().getTime()),
@@ -29,14 +29,14 @@ public class EventDatabase extends AbstractDatabase<Long, Event> {
     );
 
     public List<Event> selectByTitle(String title) {
-        logger.info("Method {}#selectByTitle was called with param: title = {}", this.getClass().getSimpleName(), title);
+        LOG.info("Method {}#selectByTitle was called with param: title = {}", this.getClass().getSimpleName(), title);
         return getData().values().stream()
                 .filter(event -> event.getTitle().equals(title))
                 .collect(Collectors.toList());
     }
 
     public List<Event> selectByDate(Date date) {
-        logger.info("Method {}#selectByDate was called with param: date = {}", this.getClass().getSimpleName(), date);
+        LOG.info("Method {}#selectByDate was called with param: date = {}", this.getClass().getSimpleName(), date);
         return getData().values().stream()
                 .filter(event -> event.getDate().equals(date))
                 .collect(Collectors.toList());

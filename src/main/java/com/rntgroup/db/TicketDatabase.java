@@ -20,26 +20,26 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TicketDatabase extends AbstractDatabase<Long, Ticket> {
 
-    private static Logger logger = LoggerFactory.getLogger(TicketDatabase.class.getSimpleName());
+    static final Logger LOG = LoggerFactory.getLogger(TicketDatabase.class.getSimpleName());
 
     Map<Long, Ticket> data = new HashMap<>();
 
     public List<Ticket> selectByEventId(long eventId) {
-        logger.info("Method {}#selectByEventId was called with param: eventId = {}", this.getClass().getSimpleName(), eventId);
+        LOG.info("Method {}#selectByEventId was called with param: eventId = {}", this.getClass().getSimpleName(), eventId);
         return getData().values().stream()
                 .filter(ticket -> ticket.getEventId() == eventId)
                 .collect(Collectors.toList());
     }
 
     public List<Ticket> selectByUserId(long userId) {
-        logger.info("Method {}#selectByUserId was called with param: userId = {}", this.getClass().getSimpleName(), userId);
+        LOG.info("Method {}#selectByUserId was called with param: userId = {}", this.getClass().getSimpleName(), userId);
         return getData().values().stream()
                 .filter(ticket -> ticket.getUserId() == userId)
                 .collect(Collectors.toList());
     }
 
     public Ticket selectByEventIdAndPlace(long eventId, int place) {
-        logger.info("Method {}#selectByEventIdAndPlace was called with params: eventId = {}, place = {}",
+        LOG.info("Method {}#selectByEventIdAndPlace was called with params: eventId = {}, place = {}",
                 this.getClass().getSimpleName(), eventId, place);
         return getData().values().stream()
                 .filter(ticket -> ticket.getEventId() == eventId && ticket.getPlace() == place)
