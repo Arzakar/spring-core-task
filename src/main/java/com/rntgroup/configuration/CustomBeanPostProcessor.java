@@ -4,8 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rntgroup.db.EventDatabase;
+import com.rntgroup.db.TicketDatabase;
 import com.rntgroup.db.UserDatabase;
-import com.rntgroup.model.Entity;
+import com.rntgroup.model.Event;
+import com.rntgroup.model.Ticket;
+import com.rntgroup.model.User;
+
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -24,9 +29,15 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     private static final Logger LOG = LoggerFactory.getLogger(CustomBeanPostProcessor.class.getName());
     private final ObjectMapper objectMapper = new ObjectMapper().setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
+    @Setter
+    private String eventDataFilePath;
+    @Setter
+    private String ticketDataFilePath;
+    @Setter
+    private String userDataFilePath;
+
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-
         return bean;
     }
 
@@ -36,43 +47,76 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
 
         Class<?> beanClass = bean.getClass();
 
-//        if (beanClass.equals(EventDatabase.class)
-//                || beanClass.equals(UserDatabase.class)
-//                || beanClass.equals(TicketDatabase.class)) {
-//            fillDatabase(bean);
-//        }
+        if (beanClass.equals(EventDatabase.class)) {
+            loadEventData(bean);
+            LOG.info("Data loaded successfully in {} from {}", beanClass.getSimpleName(), eventDataFilePath);
+        }
+
+        if (beanClass.equals(TicketDatabase.class)) {
+            loadTicketData(bean);
+            LOG.info("Data loaded successfully in {} from {}", beanClass.getSimpleName(), ticketDataFilePath);
+        }
+
+        if (beanClass.equals(UserDatabase.class)) {
+            loadUserData(bean);
+            LOG.info("Data loaded successfully in {} from {}", beanClass.getSimpleName(), userDataFilePath);
+        }
 
         return bean;
     }
 
-    private void fillDatabase(Object bean) {
-        if (bean.getClass().equals(EventDatabase.class)) {
-            dataSetter(bean, "eventDatabaseFilePath");
-        }
-
-        if (bean.getClass().equals(UserDatabase.class)) {
-            dataSetter(bean, "userDatabaseFilePath");
-        }
-
-        if (bean.getClass().equals(UserDatabase.class)) {
-            dataSetter(bean, "ticketDatabaseFilePath");
-        }
-    }
-
-    private void dataSetter(Object bean, String filePath) {
-        Field[] fields = bean.getClass().getDeclaredFields();
-
-        Map<Long, ? extends Entity<Long>> data;
+    private void loadEventData(Object bean) {
+        Map<Long, Event> data;
 
         try {
             data = objectMapper.readValue(
-                    readResourceAsString(filePath),
-                    new TypeReference<>() {
-                    });
+                    readResourceAsString(eventDataFilePath),
+                    new TypeReference<>() {});
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
 
+        Field[] fields = bean.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getName().equals("data")) {
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, bean, data);
+            }
+        }
+    }
+
+    private void loadTicketData(Object bean) {
+        Map<Long, Ticket> data;
+
+        try {
+            data = objectMapper.readValue(
+                    readResourceAsString(ticketDataFilePath),
+                    new TypeReference<>() {});
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        Field[] fields = bean.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getName().equals("data")) {
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, bean, data);
+            }
+        }
+    }
+
+    private void loadUserData(Object bean) {
+        Map<Long, User> data;
+
+        try {
+            data = objectMapper.readValue(
+                    readResourceAsString(userDataFilePath),
+                    new TypeReference<>() {});
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (field.getName().equals("data")) {
                 field.setAccessible(true);
