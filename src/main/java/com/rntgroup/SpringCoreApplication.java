@@ -1,15 +1,24 @@
 package com.rntgroup;
 
 import com.rntgroup.facade.BookingFacade;
+import com.rntgroup.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringCoreApplication {
 
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-        BookingFacade bookingFacade = context.getBean("bookingFacade", BookingFacade.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SpringCoreApplication.class.getName());
 
+    public static void main(String[] args) {
+        LOG.info("Method {}#main was called with param: {}", SpringCoreApplication.class.getSimpleName(), args);
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        LOG.info("ApplicationContext loaded successfully");
+
+        BookingFacade bookingFacade = context.getBean("bookingFacade", BookingFacade.class);
+        bookingFacade.createUser(new User(0L, "User", "user.email@gmail.com"));
     }
 
 }
