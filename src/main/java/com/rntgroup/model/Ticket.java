@@ -9,10 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-/**
- * TODO: Ticket id should be unique
- */
-
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -33,20 +29,4 @@ public class Ticket implements Entity<Long> {
         PREMIUM,
         BAR
     }
-
-    /**
-     * Ticket Id. UNIQUE.
-     * @return Ticket Id.
-     */
-//    long getId();
-//    void setId(long id);
-//    long getEventId();
-//    void setEventId(long eventId);
-//    long getUserId();
-//    void setUserId(long userId);
-//    Category getCategory();
-//    void setCategory(Category category);
-//    int getPlace();
-//    void setPlace(int place);
-
 }

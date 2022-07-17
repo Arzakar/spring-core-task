@@ -11,10 +11,6 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
 
-/**
- * TODO: Event id should be unique
- */
-
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -28,14 +24,4 @@ public class Event implements Entity<Long> {
     String title;
     Date date;
 
-    /**
-     * Event id. UNIQUE.
-     * @return Event Id
-     */
-//    long getId();
-//    void setId(long id);
-//    String getTitle();
-//    void setTitle(String title);
-//    Date getDate();
-//    void setDate(Date date);
 }

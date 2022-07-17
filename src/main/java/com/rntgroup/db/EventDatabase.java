@@ -2,6 +2,7 @@ package com.rntgroup.db;
 
 import com.rntgroup.db.util.IdGenerator;
 import com.rntgroup.model.Event;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
